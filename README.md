@@ -71,6 +71,8 @@ git clone [https://github.com/harsha486264/assignment.git](https://github.com/ha
 
 * ansible-playbook lnc-demo.yml
 
+Note: Please make sure to use ansible version 2.4 or older
+
 ## Get Instance public IP
 
 * aws ec2 describe-instances --filters "Name=tag:Name,Values=lncinstance" |grep "PublicIpAddress"|awk -F: '{print "http://"$2}'|tr -d ' '|tr -d '"' | tr -d ','
