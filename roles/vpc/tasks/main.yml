@@ -1,0 +1,23 @@
+---
+- name: "Creating VPC"
+  ec2_vpc:
+   state: present
+   cidr_block: 10.0.0.0/24
+   resource_tags: {"Name": "lncvpc"}
+   region: us-east-1
+   subnets:
+     - cidr: 10.0.0.0/24
+       az: us-east-1a
+       resource_tags: { "Name":"websg"}
+   internet_gateway: True
+   route_tables:
+     - subnets:
+        - 10.0.0.0/24
+       routes:
+        - dest: 0.0.0.0/0
+          gw: igw
+  register: vpc
+- debug:
+   msg: "{{ item.id }}"
+  with_items:
+    - "{{ vpc.subnets }}"

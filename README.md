@@ -1,4 +1,3 @@
-# assignment
 Nginx using Docker in AWS
 
 # Setup your environment 
@@ -50,12 +49,6 @@ $ sudo apt-get install ansible
 
 * vpc
 
-* igw
-
-* route tables
-
-* subnets
-
 * security groups
 
 * mkdir lncdemo
@@ -66,12 +59,21 @@ $ sudo apt-get install ansible
 
 * cd roles
 
-* mkdir -p vpc/{tasks,vars} igw/{tasks,vars} routetables/{tasks,vars} subnets sg/{tasks,vars}
+* mkdir -p vpc/{tasks,vars} sg/{tasks,vars} ec2/tasks
 
-## Create Security Group (open 22 and 80)
+## Clone 
 
-* aws ec2 create-security-group --group-name lncsg --description "LNC demo SG"
+git clone [https://github.com/harsha486264/assignment.git](https://github.com/harsha486264/assignment.git)
 
-## Launch AWS instance (I am using us-east-1 and ubuntu AMI for this demo)
+## Run ansible playbook
 
-* aws ec2 run-instances --image-id ami-01ac7d9c1179d7b74 ---instance-type t2.micro --key-name lncdemo 
+* cd assignment
+
+* ansible-playbook lnc-demo.yml
+
+## Get Instance public IP
+
+* aws ec2 describe-instances --filters "Name=tag:Name,Values=lncinstance" |grep "PublicIpAddress"|awk -F: '{print "http://"$2}'|tr -d ' '|tr -d '"' | tr -d ','
+
+* copy paste the url in the browser
+
