@@ -5,7 +5,7 @@
    instance_type: t2.micro
    image: ami-0ac019f4fcb7cb7e6
    group: lncsg
-   vpc_subnet_id: "{{ item.id }}"
+   vpc_subnet_id: "{{ subnet.subnet.id }}"
    assign_public_ip: yes
    user_data: "{{ lookup('file', 'docker.sh') }}"
    wait: true
@@ -15,11 +15,8 @@
    exact_count: 1
    count_tag:
     Name: lncinstance
-  with_items:
-    - "{{ vpc.subnets }}"
   register: ec2
-
-- debug: 
-   msg: "{{ item.public_ip }}"
+- debug:
+         msg: "{{ item.public_ip }}"
   with_items:
-    - "{{ ec2.results }}"
+          "{{ ec2.tagged_instances }}"

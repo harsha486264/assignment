@@ -26,7 +26,7 @@ Nginx using Docker in AWS
 
     * secretkey
 
-    * region
+    * region (us-east-1)
 
     * output format
 
@@ -40,27 +40,15 @@ Nginx using Docker in AWS
 
 ## Setup ansible in your local environment
 
-$ sudo apt-get update
-$ sudo apt-get install software-properties-common
-$ sudo apt-add-repository --yes --update ppa:ansible/ansible
-$ sudo apt-get install ansible
-
-## Create ansible roles
-
-* vpc
-
-* security groups
-
-* mkdir lncdemo
-
-* cd lncdemo
-
-* mkdir roles
-
-* cd roles
-
-* mkdir -p vpc/{tasks,vars} sg/{tasks,vars} ec2/tasks
-
+```
+sudo apt-get update
+sudo apt-get install -y software-properties-common
+sudo apt-add-repository --yes --update ppa:ansible/ansible
+sudo apt-get install -y ansible
+sudo apt-get install -y python-pip
+sudo pip install boto
+sudo pip install boto3
+```
 ## Clone 
 
 git clone [https://github.com/harsha486264/assignment.git](https://github.com/harsha486264/assignment.git)
@@ -70,8 +58,6 @@ git clone [https://github.com/harsha486264/assignment.git](https://github.com/ha
 * cd assignment
 
 * ansible-playbook lnc-demo.yml
-
-Note: Please make sure to use ansible version 2.4 or older
 
 ## Get Instance public IP
 

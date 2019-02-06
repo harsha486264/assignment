@@ -4,7 +4,7 @@
    name: "lncsg"
    description: "lnc demo web sg"
    tags: { "Name": "lncsg"}
-   vpc_id: "{{ vpc.vpc_id }}"
+   vpc_id: "{{ vpc.vpc.id }}"
    region: us-east-1
    rules: 
     - proto: tcp
